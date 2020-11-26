@@ -50,5 +50,5 @@ app.post("/validate", (req, res) => {
 });
 
 //listen
-const PORT = process.env.PORT ? process.env.PORT : 8000;
-app.listen(8000, () => console.log(`Listening at http://localhost:${PORT}`));
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`));
