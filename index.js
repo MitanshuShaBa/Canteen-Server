@@ -2,6 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const Razorpay = require("razorpay");
 const hmac_sha256 = require("crypto-js/hmac-sha256");
+const admin = require("firebase-admin");
+const serviceAccount = require("./kjsieit-canteen-f0f64971a94b.json");
+const { response } = require("express");
+const { DateTime, Interval } = require("luxon");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+const db = admin.firestore();
 
 const app = express();
 
@@ -47,6 +56,107 @@ app.post("/validate", (req, res) => {
   } else {
     res.send(false);
   }
+});
+
+const report = (orders) => {
+  let total_revenue = 0;
+  let total_sales = 0;
+  let total_orders = 0;
+  let total_orders_cancelled = 0;
+  let sale_per_item = {};
+
+  orders.forEach((data) => {
+    if (data.status == "cancelled") {
+      total_orders_cancelled += 1;
+    } else {
+      total_orders += 1;
+      total_revenue += data.total_amount;
+
+      data.items.map((item) => {
+        let itemDetail = data.bill[item];
+
+        total_sales += itemDetail.quantity;
+        if (sale_per_item[item] !== undefined) {
+          // item is in sales_per_item
+          sale_per_item[item].quantity =
+            sale_per_item[item].quantity + itemDetail.quantity;
+
+          sale_per_item[item].total =
+            sale_per_item[item].total + itemDetail.quantity * itemDetail.price;
+        } else {
+          // item is not in sales_per_item so add it
+          sale_per_item[item] = {
+            quantity: itemDetail.quantity,
+            total: itemDetail.quantity * itemDetail.price,
+          };
+        }
+      });
+    }
+  });
+
+  let most_sold_item = Object.keys(sale_per_item);
+  most_sold_item.sort(
+    (a, b) => sale_per_item[b].quantity - sale_per_item[a].quantity
+  );
+  most_sold_item = most_sold_item; // apply logic to select top
+
+  let most_revenue_item = Object.keys(sale_per_item);
+  most_revenue_item.sort(
+    (a, b) => sale_per_item[b].total - sale_per_item[a].total
+  );
+  most_revenue_item = most_revenue_item; // apply logic to select top
+
+  return {
+    total_revenue,
+    total_sales,
+    total_orders,
+    total_orders_cancelled,
+    sale_per_item,
+    most_sold_item,
+    most_revenue_item,
+  };
+};
+
+app.get("/reports", (req, res) => {
+  db.collection("orders")
+    .orderBy("placed_at", "desc")
+    .get()
+    .then((snapshot) => {
+      let orders = [];
+      let weekOrders = [];
+      let monthOrders = [];
+
+      let dateNow = DateTime.local();
+      let datePrevWeek = dateNow.minus({ days: 7 });
+      let datePrevMonth = dateNow.minus({ days: 30 });
+      let weekInterval = Interval.fromDateTimes(datePrevWeek, dateNow);
+      let monthInterval = Interval.fromDateTimes(datePrevMonth, dateNow);
+
+      // console.log(dateNow.toUTC().toJSDate().toString());
+      // console.log(datePrevWeek.toUTC().toJSDate().toString());
+      // console.log();
+
+      snapshot.forEach((doc) => {
+        let data = doc.data();
+        let orderDate = DateTime.fromJSDate(data.placed_at.toDate());
+        orders.push(data);
+
+        if (weekInterval.contains(orderDate)) {
+          weekOrders.push(data);
+        }
+
+        if (monthInterval.contains(orderDate)) {
+          monthOrders.push(data);
+        }
+      });
+
+      res.send({
+        total: report(orders),
+        week: report(weekOrders),
+        month: report(monthOrders),
+      });
+    })
+    .catch((err) => console.log(err));
 });
 
 //listen
