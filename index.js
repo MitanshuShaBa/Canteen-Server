@@ -4,7 +4,6 @@ const Razorpay = require("razorpay");
 const hmac_sha256 = require("crypto-js/hmac-sha256");
 const admin = require("firebase-admin");
 const serviceAccount = require("./kjsieit-canteen-f0f64971a94b.json");
-const { response } = require("express");
 const { DateTime, Interval } = require("luxon");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -117,6 +116,14 @@ const report = (orders) => {
   };
 };
 
+const isToday = (someDate, today) => {
+  return (
+    someDate.getDate() == today.getDate() &&
+    someDate.getMonth() == today.getMonth() &&
+    someDate.getFullYear() == today.getFullYear()
+  );
+};
+
 app.get("/reports", (req, res) => {
   db.collection("orders")
     .orderBy("placed_at", "desc")
@@ -125,6 +132,7 @@ app.get("/reports", (req, res) => {
       let orders = [];
       let weekOrders = [];
       let monthOrders = [];
+      let dayOrders = [];
 
       let dateNow = DateTime.local();
       let datePrevWeek = dateNow.minus({ days: 7 });
@@ -148,12 +156,16 @@ app.get("/reports", (req, res) => {
         if (monthInterval.contains(orderDate)) {
           monthOrders.push(data);
         }
+        if (isToday(orderDate.toJSDate(), dateNow.toJSDate())) {
+          dayOrders.push(data);
+        }
       });
 
       res.send({
         total: report(orders),
         week: report(weekOrders),
         month: report(monthOrders),
+        day: report(dayOrders),
       });
     })
     .catch((err) => console.log(err));
