@@ -3,8 +3,23 @@ const cors = require("cors");
 const Razorpay = require("razorpay");
 const hmac_sha256 = require("crypto-js/hmac-sha256");
 const admin = require("firebase-admin");
-const serviceAccount = require("./kjsieit-canteen-f0f64971a94b.json");
+require("dotenv").config();
 const { DateTime, Interval } = require("luxon");
+
+const serviceAccount = {
+  type: "service_account",
+  project_id: "kjsieit-canteen",
+  private_key_id: process.env.private_key_id,
+  private_key: process.env.private_key,
+  client_email: "kjsieit-canteen@appspot.gserviceaccount.com",
+  client_id: process.env.client_id,
+  auth_uri: "https://accounts.google.com/o/oauth2/auth",
+  token_uri: "https://oauth2.googleapis.com/token",
+  auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+  client_x509_cert_url:
+    "https://www.googleapis.com/robot/v1/metadata/x509/kjsieit-canteen%40appspot.gserviceaccount.com",
+};
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
