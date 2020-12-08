@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "kjsieit-canteen",
+  "private_key_id": "e59d24b939b776bf9fe1206d1fc4afc9cb1ccea6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCyvQW6wYIAzTSX\nsEsX2ZuOIowl6ZpXw+QLa8jebh9jwS4TZAF8U5ClstnMz8gjJBPlN0rxgsKR7wso\nKayPyAAHkD6OEDVP+gdOkU6i+nmG7WDzr94cReLo6cDrqZscKgVFlEEkcjXIpqEG\nk3r4bDUgaMkcBsm3xiHnzwjSwLhWG0dGASXUJOTobgV7jJKDGGGi8bFWPf4kYkMJ\nWyIi4E3W6sxFcIejBUTj+hvG0k1GPMM6UJ9FCrMBkMDZYclaIanlbswbAfrJgND4\nGCS8w516hMCuT+zKyuXaMWjXuzzRK8YBexUqj4QY+FH9YtngeX4JHZ0bKEJj2TCy\n5CxsXf+RAgMBAAECggEAASDf3yK3HSWughGnG7awPHi73UZpBspSD39l9H+J+7F9\nxroQJ1aIuH8VUG10ZEJnTMBpXPZ4H388mQuQTxUSaPnQZ0mzaHaZ4rVYo39E0qT/\ngnJXCuMnEFTfdq1qsQYT4/FQavg8njBtHlNCiLx4JmT69g4V6m7aCnJcaiY007hU\nJhgPiH+vpvFAyWAp/53sv5bM9ty654CbW3VJ2cuNrpudds74/hMGJyVZmZp5dQmw\n00/ME8RJtzd9JStiwJF9yCAp25NHCp1DQqF1xLSAZTbNIJg62qS/87CGxAHSEbpO\n4C0JcRAbvcWHaS/ngA09RoGl+XOE8j5suOjjOwyP8QKBgQDv+e0pN0klXQ377fI4\nSBKVWPXIJUNfy7Ft6IaQLC2VFnXKltYR/5HyvqJhXaxXid65uIcnoKoUhzbucLy1\n6DBCHmOTqO1amNUYcoVjxVuuI4ElJwEjwcESSxCwog4ahg31XvuST5UnKTvFvi1R\nZy4fMfKoPq4XHxVxLOeqAx/qqQKBgQC+rFDaZBvZJGpCZZIT1KuL7rDbUuOPgfvw\nxrb9QwQZVCZiGMFA3NPbZicpCam2TupDqowghCHUJmLhAXPH1Why/zpBHWKrFbjy\nSM0hshiFP7CkGbnbhVbMoskyY2i3iErDfyE8kVFqd9hHH+xAktLTKh/8YQtTKyrJ\nriLIrR8mqQKBgHjbmBN/4njMyrQsfCbYNXO939qy2aGvRmaiCtMlTLefHievm5Ro\n8Coe1EzRDnDv4JoMUxUkF0RLbODdKk066MMD5waAtzk/a2Lqmj9LMAcdnncFk89c\nT05VO8yZcRzukq0W7wAa0HVukMngI5axrkrLrvgIyUifwP7ErM+0zygxAoGAIRyh\nidt6rpHRVih3XrQ++jUAR4Y0eHZ1PxHzMzYRHyjq5XwxC0eODvrFcC36Z+t6aTfT\nz83CZiooX7S1240m71l9T1OAD//ct06HOQPJmFJAJa9GBGY6dZ0LXZG/3KdxfFO2\nfOMrhVa8m1Vi3K/ipsMY/OYJZm8HpjB0X+8YiskCgYAKtU4qOGPAZ/CxE4ejBE3r\n/CqHJkWyMGdCJIBnQNl6AqQliMiK+lui97uiXxnMRwVDeEbcKUa1wf8DDKxdBpf2\n5ufRIRsrV080Fq48Yd4bxk5XKkXRn2+NgUGBPd4hJqaOo7dxyl58EH7aL/xRVCZp\ndoNIAVXpb0pHOGiN142dJA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "kjsieit-canteen@appspot.gserviceaccount.com",
+  "client_id": "117629358682196742432",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kjsieit-canteen%40appspot.gserviceaccount.com"
+}
