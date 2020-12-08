@@ -6,6 +6,8 @@ const admin = require("firebase-admin");
 require("dotenv").config();
 const { DateTime, Interval } = require("luxon");
 
+console.log(process.env.private_key_id);
+
 const serviceAccount = {
   type: "service_account",
   project_id: "kjsieit-canteen",
