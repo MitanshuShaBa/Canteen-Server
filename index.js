@@ -7,6 +7,7 @@ require("dotenv").config();
 const { DateTime, Interval } = require("luxon");
 
 console.log(process.env.private_key_id);
+console.log(process.env.private_key);
 
 const serviceAccount = {
   type: "service_account",
