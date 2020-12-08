@@ -13,7 +13,7 @@ const serviceAccount = {
   type: "service_account",
   project_id: "kjsieit-canteen",
   private_key_id: process.env.private_key_id,
-  private_key: process.env.private_key,
+  private_key: String(process.env.private_key),
   client_email: "kjsieit-canteen@appspot.gserviceaccount.com",
   client_id: "117629358682196742432",
   auth_uri: "https://accounts.google.com/o/oauth2/auth",
