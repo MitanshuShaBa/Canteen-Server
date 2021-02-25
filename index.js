@@ -187,6 +187,39 @@ app.get("/reports", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.get("/processTimestamp/:docId", (req, res) => {
+  docId = req.params.docId;
+  db.collection("orders")
+    .doc(docId)
+    .get()
+    .then((doc) => {
+      doc_data = doc.data();
+      seconds = doc_data.placed_at._seconds;
+      // console.log(seconds);
+      db.collection("orders")
+        .doc(doc.id)
+        .update({ placed_at_seconds: seconds });
+      res.send("Done");
+    })
+    .catch((err) => console.log(err));
+});
+
+// app.get("/processTimestamps", (req, res) => {
+//   db.collection("orders")
+//     .get()
+//     .then((querySnapshot) => {
+//       querySnapshot.forEach((doc) => {
+//         doc_data = doc.data();
+//         seconds = doc_data.placed_at._seconds;
+//         console.log(seconds);
+//         db.collection("orders")
+//           .doc(doc.id)
+//           .update({ placed_at_seconds: seconds });
+//       });
+//     })
+//     .catch((err) => console.log(err));
+// });
+
 //listen
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`));
