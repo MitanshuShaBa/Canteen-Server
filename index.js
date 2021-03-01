@@ -203,21 +203,21 @@ app.get("/processTimestamp/:docId", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-// app.get("/processTimestamps", (req, res) => {
-//   db.collection("orders")
-//     .get()
-//     .then((querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//         doc_data = doc.data();
-//         seconds = doc_data.placed_at._seconds;
-//         console.log(seconds);
-//         db.collection("orders")
-//           .doc(doc.id)
-//           .update({ placed_at_seconds: seconds });
-//       });
-//     })
-//     .catch((err) => console.log(err));
-// });
+app.get("/processTimestamps", (req, res) => {
+  db.collection("orders")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc_data = doc.data();
+        seconds = doc_data.placed_at._seconds;
+        console.log(seconds);
+        db.collection("orders")
+          .doc(doc.id)
+          .update({ placed_at_seconds: seconds });
+      });
+    })
+    .catch((err) => console.log(err));
+});
 
 //listen
 const PORT = process.env.PORT || 8000;
