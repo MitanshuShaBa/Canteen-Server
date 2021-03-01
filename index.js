@@ -214,6 +214,7 @@ app.get("/processTimestamps", (req, res) => {
         db.collection("orders")
           .doc(doc.id)
           .update({ placed_at_seconds: seconds });
+        res.send("Done");
       });
     })
     .catch((err) => console.log(err));
